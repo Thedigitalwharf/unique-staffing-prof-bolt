@@ -13,7 +13,9 @@ import { EmailVerification } from "@/pages/EmailVerification"
 import { PrivacyPolicy } from "@/pages/PrivacyPolicy"
 import { TermsOfService } from "@/pages/TermsOfService"
 import { Unsubscribe } from "@/pages/Unsubscribe"
+import { OpenAPIDocs } from "@/pages/OpenAPIDocs"
 import { Toaster } from "@/components/ui/sonner"
+import { CookieConsent } from "@/components/CookieConsent"
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/unsubscribe" element={<Unsubscribe />} />
+                <Route path="/openapi/docs" element={<OpenAPIDocs />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route
                   path="/admin/dashboard"
@@ -41,6 +44,7 @@ function App() {
                 />
               </Routes>
               <Toaster />
+              <CookieConsent />
             </Router>
           </BusinessInfoProvider>
         </AuthProvider>

@@ -232,6 +232,20 @@ export interface Translations {
     marketing: string
     marketingDesc: string
     learnMore: string
+    doNotSell: string
+    hideDetails: string
+  }
+  jobs: {
+    title: string
+    subtitle: string
+    searchTitle: string
+    searchZip: string
+    search: string
+    loading: string
+    noResults: string
+    clearFilters: string
+    featured: string
+    applyNow: string
   }
   talentModal: {
     title: string
@@ -351,8 +365,8 @@ export const translations: Record<Language, Translations> = {
       terms: 'Terms of Service',
     },
     hero: {
-      title: 'Connecting Talent with Opportunity',
-      subtitle: 'Professional staffing solutions for businesses and job seekers across Maryland and the DC metro area',
+      title: 'Where Opportunity Starts!',
+      subtitle: 'Your Trusted Partner for Employment Opportunities. Serving Washington D.C., Maryland, Virginia, Illinois, Ohio, and New Jersey.',
       ctaEmployers: 'Find Talent',
       ctaJobSeekers: 'Find Jobs',
       yearsExperience: 'Years Experience',
@@ -527,7 +541,7 @@ export const translations: Record<Language, Translations> = {
       messagePlaceholder: 'Tell us about your staffing needs or career goals...',
     },
     footer: {
-      tagline: 'Connecting talent with opportunity since 2010',
+      tagline: 'Expand access to meaningful employment across the globe by delivering innovative staffing solutions, cultivating local partnerships, and empowering individuals.',
       quickLinks: 'Quick Links',
       services: 'Services',
       contactUs: 'Contact Us',
@@ -571,6 +585,20 @@ export const translations: Record<Language, Translations> = {
       marketing: 'Marketing Cookies',
       marketingDesc: 'Used to track visitors and display relevant advertisements.',
       learnMore: 'Learn more in our Privacy Policy',
+      doNotSell: 'Do Not Sell My Personal Information',
+      hideDetails: 'Hide Details',
+    },
+    jobs: {
+      title: 'Current Job Openings',
+      subtitle: 'Find your next career opportunity with top employers in your area',
+      searchTitle: 'Job title or category',
+      searchZip: 'ZIP code',
+      search: 'Search',
+      loading: 'Loading jobs...',
+      noResults: 'No jobs found matching your criteria',
+      clearFilters: 'Clear Filters',
+      featured: 'Featured',
+      applyNow: 'Apply Now',
     },
     talentModal: {
       title: 'Join Our Talent Network',
@@ -688,8 +716,8 @@ export const translations: Record<Language, Translations> = {
       terms: 'Términos de Servicio',
     },
     hero: {
-      title: 'Conectando Talento con Oportunidades',
-      subtitle: 'Soluciones profesionales de personal para empresas y buscadores de empleo en Maryland y el área metropolitana de DC',
+      title: '¡Donde Comienza la Oportunidad!',
+      subtitle: 'Su Socio de Confianza para Oportunidades de Empleo. Sirviendo a Washington D.C., Maryland, Virginia, Illinois, Ohio y Nueva Jersey.',
       ctaEmployers: 'Encontrar Talento',
       ctaJobSeekers: 'Encontrar Empleos',
       yearsExperience: 'Años de Experiencia',
@@ -864,7 +892,7 @@ export const translations: Record<Language, Translations> = {
       messagePlaceholder: 'Cuéntenos sobre sus necesidades de personal u objetivos profesionales...',
     },
     footer: {
-      tagline: 'Conectando talento con oportunidades desde 2010',
+      tagline: 'Expandir el acceso a empleos significativos en todo el mundo mediante la entrega de soluciones innovadoras de personal, el cultivo de asociaciones locales y el empoderamiento de las personas.',
       quickLinks: 'Enlaces Rápidos',
       services: 'Servicios',
       contactUs: 'Contáctenos',
@@ -908,6 +936,20 @@ export const translations: Record<Language, Translations> = {
       marketing: 'Cookies de Marketing',
       marketingDesc: 'Utilizadas para rastrear visitantes y mostrar anuncios relevantes.',
       learnMore: 'Más información en nuestra Política de Privacidad',
+      doNotSell: 'No Vender Mi Información Personal',
+      hideDetails: 'Ocultar Detalles',
+    },
+    jobs: {
+      title: 'Ofertas de Empleo Actuales',
+      subtitle: 'Encuentre su próxima oportunidad profesional con los mejores empleadores de su área',
+      searchTitle: 'Título o categoría',
+      searchZip: 'Código postal',
+      search: 'Buscar',
+      loading: 'Cargando empleos...',
+      noResults: 'No se encontraron empleos que coincidan con sus criterios',
+      clearFilters: 'Limpiar Filtros',
+      featured: 'Destacado',
+      applyNow: 'Aplicar Ahora',
     },
     talentModal: {
       title: 'Únase a Nuestra Red de Talento',
@@ -1025,8 +1067,8 @@ export const translations: Record<Language, Translations> = {
       terms: 'Conditions d\'Utilisation',
     },
     hero: {
-      title: 'Connecter les Talents avec les Opportunités',
-      subtitle: 'Solutions professionnelles de recrutement pour les entreprises et les chercheurs d\'emploi dans le Maryland et la région métropolitaine de DC',
+      title: 'Là Où L\'Opportunité Commence!',
+      subtitle: 'Votre Partenaire de Confiance pour les Opportunités d\'Emploi. Au service de Washington D.C., Maryland, Virginie, Illinois, Ohio et New Jersey.',
       ctaEmployers: 'Trouver des Talents',
       ctaJobSeekers: 'Trouver des Emplois',
       yearsExperience: 'Années d\'Expérience',
@@ -1201,7 +1243,7 @@ export const translations: Record<Language, Translations> = {
       messagePlaceholder: 'Parlez-nous de vos besoins en personnel ou de vos objectifs de carrière...',
     },
     footer: {
-      tagline: 'Connecter les talents avec les opportunités depuis 2010',
+      tagline: 'Élargir l\'accès à un emploi significatif dans le monde entier en proposant des solutions de recrutement innovantes, en cultivant des partenariats locaux et en autonomisant les individus.',
       quickLinks: 'Liens Rapides',
       services: 'Services',
       contactUs: 'Contactez-nous',
@@ -1245,6 +1287,20 @@ export const translations: Record<Language, Translations> = {
       marketing: 'Cookies Marketing',
       marketingDesc: 'Utilisés pour suivre les visiteurs et afficher des publicités pertinentes.',
       learnMore: 'En savoir plus dans notre Politique de Confidentialité',
+      doNotSell: 'Ne Pas Vendre Mes Informations Personnelles',
+      hideDetails: 'Masquer les Détails',
+    },
+    jobs: {
+      title: 'Offres d\'Emploi Actuelles',
+      subtitle: 'Trouvez votre prochaine opportunité de carrière auprès des meilleurs employeurs de votre région',
+      searchTitle: 'Titre ou catégorie',
+      searchZip: 'Code postal',
+      search: 'Rechercher',
+      loading: 'Chargement des emplois...',
+      noResults: 'Aucun emploi trouvé correspondant à vos critères',
+      clearFilters: 'Effacer les Filtres',
+      featured: 'En Vedette',
+      applyNow: 'Postuler Maintenant',
     },
     talentModal: {
       title: 'Rejoignez Notre Réseau de Talents',

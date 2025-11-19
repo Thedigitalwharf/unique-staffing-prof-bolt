@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, MessageSquare, Printer } from "lucide-react"
+import { Phone, Mail, MapPin, MessageSquare, Printer, Facebook } from "lucide-react"
 import { useBusinessInfo } from "@/contexts/BusinessInfoContext"
 import { BusinessAddress, BusinessPhone, BusinessEmail } from "@/components/seo/NAPDisplay"
 import { useLanguage } from "@/contexts/LanguageContext"
@@ -22,15 +22,22 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12" itemScope itemType="https://schema.org/LocalBusiness">
           <div className="lg:col-span-2">
-            <h3 className="font-heading font-bold text-2xl mb-4" itemProp="name">
-              {businessInfo.name}
-            </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="/logo.webp"
+                alt="Unique Staffing Professionals Logo"
+                className="h-12 w-auto"
+              />
+              <h3 className="font-heading font-bold text-2xl" itemProp="name">
+                {businessInfo.name}
+              </h3>
+            </div>
             <p className="text-primary-foreground/80 mb-4 leading-relaxed" itemProp="description">
               {t('footer.tagline')}
             </p>
             {businessInfo.ceo && (
               <p className="text-primary-foreground/70 text-sm mb-6">
-                Led by CEO {businessInfo.ceo}
+                CEO: {businessInfo.ceo}
               </p>
             )}
             <div className="flex gap-4">
@@ -42,6 +49,9 @@ export function Footer() {
               </a>
               <a href={`sms:${businessInfo.contact.textLine}`} className="text-primary-foreground hover:text-accent transition-colors" aria-label="Text us">
                 <MessageSquare size={24} />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=100090234361028" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:text-accent transition-colors" aria-label="Follow us on Facebook">
+                <Facebook size={24} />
               </a>
             </div>
           </div>

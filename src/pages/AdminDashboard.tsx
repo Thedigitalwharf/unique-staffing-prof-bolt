@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { SignOut, MagnifyingGlass, Download, Eye, Funnel, SortAscending, Buildings, ChartBar } from "@phosphor-icons/react"
+import { SignOut, MagnifyingGlass, Download, Eye, Funnel, SortAscending, Buildings, ChartBar, Export, Briefcase } from "@phosphor-icons/react"
 import { toast } from "sonner"
 import { useAuth } from "@/contexts/AuthContext"
 import { supabase, Applicant } from "@/lib/supabase"
@@ -42,6 +42,7 @@ export function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [sortBy, setSortBy] = useState<string>("created_at_desc")
+  const [positionFilter, setPositionFilter] = useState<string>("all")
   const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null)
   const [isDetailDialogOpen, setIsDetailDialogOpen] = useState(false)
   const [updatingStatus, setUpdatingStatus] = useState(false)
@@ -60,7 +61,47 @@ export function AdminDashboard() {
 
   useEffect(() => {
     filterAndSortApplicants()
-  }, [applicants, searchQuery, statusFilter, sortBy])
+  }, [applicants, searchQuery, statusFilter, positionFilter, sortBy])
+
+  // Get unique positions for filter
+  const uniquePositions = Array.from(new Set(
+    applicants.flatMap(app =>
+      app.positions_interested && app.positions_interested.length > 0
+        ? app.positions_interested
+        : [app.position_interested]
+    ).filter(Boolean)
+  )).sort()
+
+  // Export to CSV function
+  const exportToCSV = () => {
+    const headers = ['Name', 'Email', 'Phone', 'Position', 'Experience (Years)', 'Status', 'Applied Date', 'Notes']
+    const rows = filteredApplicants.map(app => [
+      app.full_name,
+      app.email,
+      app.phone,
+      app.positions_interested?.join('; ') || app.position_interested,
+      app.experience_years,
+      app.status,
+      new Date(app.created_at).toLocaleDateString(),
+      app.notes || ''
+    ])
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    ].join('\n')
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `applicants_${new Date().toISOString().split('T')[0]}.csv`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+    toast.success('Exported to CSV')
+  }
 
   const fetchApplicants = async () => {
     try {
@@ -86,6 +127,16 @@ export function AdminDashboard() {
     // Apply status filter
     if (statusFilter !== "all") {
       filtered = filtered.filter(app => app.status === statusFilter)
+    }
+
+    // Apply position filter
+    if (positionFilter !== "all") {
+      filtered = filtered.filter(app => {
+        if (app.positions_interested && app.positions_interested.length > 0) {
+          return app.positions_interested.includes(positionFilter)
+        }
+        return app.position_interested === positionFilter
+      })
     }
 
     // Apply search filter
@@ -266,7 +317,7 @@ export function AdminDashboard() {
 
         {/* Filters */}
         <Card className="p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div className="relative">
               <MagnifyingGlass
                 size={20}
@@ -281,7 +332,7 @@ export function AdminDashboard() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Funnel size={20} className="text-muted-foreground" />
+              <Funnel size={20} className="text-muted-foreground flex-shrink-0" />
               <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger>
                   <SelectValue placeholder="Filter by status" />
@@ -298,7 +349,22 @@ export function AdminDashboard() {
             </div>
 
             <div className="flex items-center gap-2">
-              <SortAscending size={20} className="text-muted-foreground" />
+              <Briefcase size={20} className="text-muted-foreground flex-shrink-0" />
+              <Select value={positionFilter} onValueChange={setPositionFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Filter by position" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Positions</SelectItem>
+                  {uniquePositions.map(position => (
+                    <SelectItem key={position} value={position}>{position}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <SortAscending size={20} className="text-muted-foreground flex-shrink-0" />
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger>
                   <SelectValue placeholder="Sort by" />
@@ -311,6 +377,15 @@ export function AdminDashboard() {
                 </SelectContent>
               </Select>
             </div>
+          </div>
+          <div className="flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              Showing {filteredApplicants.length} of {applicants.length} applicants
+            </p>
+            <Button variant="outline" size="sm" onClick={exportToCSV} disabled={filteredApplicants.length === 0}>
+              <Export size={16} className="mr-2" />
+              Export CSV
+            </Button>
           </div>
         </Card>
 
