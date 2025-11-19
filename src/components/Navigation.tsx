@@ -32,9 +32,16 @@ export function Navigation() {
           <div className="flex items-center">
             <button
               onClick={() => scrollToSection("hero")}
-              className="font-heading font-bold text-xl lg:text-2xl text-primary hover:text-primary/80 transition-colors"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              Unique Staffing Professionals
+              <img
+                src="/logo.webp"
+                alt="Unique Staffing Professionals Logo"
+                className="h-10 lg:h-12 w-auto"
+              />
+              <span className="hidden sm:block font-heading font-bold text-lg lg:text-xl text-primary">
+                Unique Staffing
+              </span>
             </button>
           </div>
 

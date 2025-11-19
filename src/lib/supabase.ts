@@ -83,3 +83,41 @@ export interface EmailVerificationLog {
   user_agent: string | null
   created_at: string
 }
+
+// Job Listings Types
+export interface Job {
+  id: string
+  created_at: string
+  updated_at: string
+  title: string
+  description: string
+  requirements: string | null
+  location_city: string
+  location_state: string
+  location_zip: string
+  job_type: 'full-time' | 'part-time' | 'contract' | 'temporary'
+  category: string
+  salary_min: number | null
+  salary_max: number | null
+  salary_type: 'hourly' | 'annual' | null
+  is_active: boolean
+  featured: boolean
+  expires_at: string | null
+}
+
+export interface JobInsert {
+  title: string
+  description: string
+  requirements?: string | null
+  location_city: string
+  location_state: string
+  location_zip: string
+  job_type: 'full-time' | 'part-time' | 'contract' | 'temporary'
+  category: string
+  salary_min?: number | null
+  salary_max?: number | null
+  salary_type?: 'hourly' | 'annual' | null
+  is_active?: boolean
+  featured?: boolean
+  expires_at?: string | null
+}

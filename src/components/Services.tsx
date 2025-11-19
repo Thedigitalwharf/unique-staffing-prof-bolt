@@ -1,9 +1,36 @@
 import { Card } from "@/components/ui/card"
 import { Sparkles, Users, ShoppingCart, Phone, Factory } from "lucide-react"
 import { useLanguage } from "@/contexts/LanguageContext"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
 
 export function Services() {
   const { t } = useLanguage()
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    }
+  }
 
   const services = [
     {
@@ -45,27 +72,32 @@ export function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
+        <motion.div
+          ref={ref}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
           {services.map((service, index) => {
             const Icon = service.icon
             return (
-              <Card
-                key={index}
-                className="p-6 lg:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border bg-card"
-              >
-                <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Icon size={28} className="text-primary" />
-                </div>
-                <h3 className="font-heading font-semibold text-xl lg:text-2xl text-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-              </Card>
+              <motion.div key={index} variants={cardVariants}>
+                <Card className="p-6 lg:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border bg-card h-full">
+                  <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                    <Icon size={28} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-semibold text-xl lg:text-2xl text-foreground mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {service.description}
+                  </p>
+                </Card>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

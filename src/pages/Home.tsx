@@ -8,6 +8,8 @@ import { EnhancedApplyForm } from "@/components/EnhancedApplyForm"
 import { Testimonials } from "@/components/Testimonials"
 import { Contact } from "@/components/Contact"
 import { Footer } from "@/components/Footer"
+import { JobListings } from "@/components/JobListings"
+import { TalentNetworkModal } from "@/components/TalentNetworkModal"
 import { useBusinessInfo } from "@/contexts/BusinessInfoContext"
 import { SEOHead } from "@/components/seo/SEOHead"
 import { StructuredData } from "@/components/seo/StructuredData"
@@ -56,12 +58,14 @@ export function Home() {
         <Hero />
         <Services />
         <Industries />
+        <JobListings />
         <WhyChooseUs />
         <EnhancedApplyForm onSuccess={handleApplicationSuccess} />
         <Testimonials />
         <Contact />
       </main>
       <Footer />
+      <TalentNetworkModal />
     </div>
   )
 }
