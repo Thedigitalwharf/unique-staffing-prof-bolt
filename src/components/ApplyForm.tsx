@@ -263,7 +263,7 @@ export function ApplyForm({ onSuccess }: ApplyFormProps) {
                   </Button>
                   {resume && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle size={16} className="text-green-600" weight="fill" />
+                      <CheckCircle size={16} className="text-primary" weight="fill" />
                       <span className="truncate max-w-[200px]">{resume.name}</span>
                     </div>
                   )}

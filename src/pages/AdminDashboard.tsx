@@ -17,11 +17,11 @@ import { supabase, Applicant } from "@/lib/supabase"
 import { BusinessInfoManager } from "@/components/admin/BusinessInfoManager"
 
 const statusColors = {
-  new: "bg-blue-100 text-blue-800",
-  reviewing: "bg-yellow-100 text-yellow-800",
-  shortlisted: "bg-green-100 text-green-800",
-  rejected: "bg-red-100 text-red-800",
-  hired: "bg-purple-100 text-purple-800"
+  new: "bg-accent/20 text-accent-foreground dark:bg-accent/30",
+  reviewing: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+  shortlisted: "bg-primary/20 text-primary dark:bg-primary/30",
+  rejected: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
+  hired: "bg-primary/30 text-primary dark:bg-primary/40"
 }
 
 const statusLabels = {
@@ -235,7 +235,7 @@ export function AdminDashboard() {
           </Card>
           <Card className="p-4">
             <p className="text-sm text-muted-foreground mb-1">New</p>
-            <p className="text-2xl font-bold text-blue-600">
+            <p className="text-2xl font-bold text-accent-foreground">
               {applicants.filter(a => a.status === 'new').length}
             </p>
           </Card>
@@ -247,13 +247,13 @@ export function AdminDashboard() {
           </Card>
           <Card className="p-4">
             <p className="text-sm text-muted-foreground mb-1">Shortlisted</p>
-            <p className="text-2xl font-bold text-green-600">
+            <p className="text-2xl font-bold text-primary">
               {applicants.filter(a => a.status === 'shortlisted').length}
             </p>
           </Card>
           <Card className="p-4">
             <p className="text-sm text-muted-foreground mb-1">Hired</p>
-            <p className="text-2xl font-bold text-purple-600">
+            <p className="text-2xl font-bold text-primary">
               {applicants.filter(a => a.status === 'hired').length}
             </p>
           </Card>
